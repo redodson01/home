@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+cd
+
+git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}" ls-files -z |
+  xargs --null file --mime-type --no-pad |
+  grep 'text/x-shellscript$' |
+  cut -f 1 -d ':' |
+  xargs --verbose shfmt --indent 2 "${@:---diff}"
