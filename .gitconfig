@@ -1,0 +1,9 @@
+[commit]
+	gpgSign = true
+[init]
+	defaultBranch = main
+[tag]
+	gpgSign = true
+[user]
+	email = richardedodson01@icloud.com
+	name = Richard E. Dodson

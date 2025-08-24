@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+if [[ ! -d "${HOME}/.ssh" ]]; then
+  git clone --branch="$(scutil --get LocalHostName)" https://github.com/redodson01/.ssh.git "${HOME}/.ssh"
+  git -C "${HOME}/.ssh" remote set-url origin git@github.com:redodson01/.ssh.git
+  chmod 400 "${HOME}/.ssh/id_ed25519"
+fi
+
+if [[ ! -d "${HOME}/.local/share/home" ]]; then
+  git init --bare --initial-branch=main "${HOME}/.local/share/home"
+  git --git-dir="${HOME}/.local/share/home" config status.showUntrackedFiles no
+  git --git-dir="${HOME}/.local/share/home" remote add -f origin git@github.com:redodson01/home.git
+  git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}" checkout --force main
+fi
+
+if [[ ! -d "${HOME}/.gnupg" ]]; then
+  git clone git@github.com:redodson01/.gnupg.git "${HOME}/.gnupg"
+  chmod 700 "${HOME}/.gnupg"
+fi
+
+if [[ ! -d "${HOME}/.password-store" ]]; then
+  git clone git@github.com:redodson01/.password-store.git "${HOME}/.password-store"
+fi
+
+if command -v /opt/homebrew/bin/brew > /dev/null; then
+  eval "$(/opt/homebrew/bin/brew shellenv bash)"
+  brew update
+else
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv bash)"
+fi
+
+brew bundle install --global
+brew bundle cleanup --global --force
+
+if [[ "$(dscl . -read "${HOME}" UserShell)" != 'UserShell: /opt/homebrew/bin/bash' ]]; then
+  sudo chsh -s "${HOMEBREW_PREFIX}/bin/bash" "${USER}"
+fi

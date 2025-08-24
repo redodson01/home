@@ -1,0 +1,6 @@
+brew "bash"
+brew "git"
+brew "gnupg"
+brew "pass"
+brew "pinentry-mac"
+brew "vim"
