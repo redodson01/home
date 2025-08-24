@@ -1,0 +1,8 @@
+[submodule ".gnupg"]
+	path = .gnupg
+	update = rebase
+	url = git@github.com:redodson01/.gnupg.git
+[submodule ".password-store"]
+	path = .password-store
+	update = rebase
+	url = git@github.com:redodson01/.password-store.git
