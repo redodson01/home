@@ -1,0 +1,6 @@
+brew "bash"
+brew "gnupg"
+brew "pass"
+brew "shellcheck"
+brew "shfmt"
+cask "ghostty"

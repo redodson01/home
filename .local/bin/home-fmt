@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+if [[ $# -eq 0 ]]; then
+  set -- --diff
+fi
+
+home-ls-shellscript | xargs shfmt --indent 2 "${@}"

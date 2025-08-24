@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+home ls-files -z "${HOME}" |
+  xargs --null file --mime-type --no-pad |
+  grep --extended-regexp '^.*: text/x-shellscript$|^.*\.bash.*: text/plain$' |
+  cut -f 1 -d ':'

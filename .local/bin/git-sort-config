@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+config_file="${HOME}/.gitconfig"
+
+if [[ $# -ge 1 ]]; then
+  config_file="${1}"
+fi
+
+# Adapted from: https://wizardsoftheweb.pro/sort-git-config
+config="$(
+  awk -F '\t' '$1 { section = $1 } $2 { print section ~ /^\[include.*\]$/ "\t" section "\t" $2 }' <"${config_file}" |
+    LC_ALL=C sort --unique |
+    awk -F '\t' 'section != $2 { print section = $2 } { print "\t" $3 }'
+)"
+
+echo "${config}" >"${config_file}"
