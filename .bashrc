@@ -37,4 +37,8 @@ if command -v rustup > /dev/null; then
   fi
 fi
 
+if command -v fzf > /dev/null; then
+  eval "$(fzf --bash)"
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
