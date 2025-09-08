@@ -73,3 +73,10 @@ if command -v fzf >/dev/null; then
 else
   echo '.bashrc: fzf: command not found' >&2
 fi
+
+if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh"
+else
+  echo ".bashrc: ${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh: No such file or directory" >&2
+fi
