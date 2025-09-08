@@ -72,3 +72,43 @@ vim -c PlugUpdate -c quitall
 if [[ -n "${CLEANUP:-}" ]]; then
   vim -c 'PlugClean!' -c quitall
 fi
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+else
+  echo "home-bootstrap: ${HOME}/.cargo/env: No such file or directory" >&2
+fi
+
+if command -v rustup >/dev/null; then
+  rustup update
+else
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --yes --no-modify-path
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+fi
+
+if [[ -d "${HOME}/.local/bin" ]]; then
+  export PATH="${HOME}/.local/bin:${PATH}"
+fi
+
+if command -v claude >/dev/null; then
+  claude update
+else
+  curl -fsSL https://claude.ai/install.sh | bash
+  export PATH="${HOME}/.local/bin:${PATH}"
+fi
+
+if command -v cmd-guard >/dev/null; then
+  cmd-guard --setup
+else
+  echo 'home-bootstrap: cmd-guard: command not found' >&2
+fi
+
+if command -v npm >/dev/null; then
+  npm install -g ccstatusline@latest
+else
+  echo 'home-bootstrap: npm: command not found' >&2
+fi

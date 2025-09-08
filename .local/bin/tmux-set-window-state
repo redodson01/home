@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+function print-usage {
+  cat <<\EOF
+Usage:
+  tmux-set-window-state (idle|busy|attn|done)
+  tmux-set-window-state -h
+EOF
+}
+
+function print-error {
+  echo "${BASH_SOURCE[0]}:" "${@}" >&2
+  print-usage >&2
+  exit 2
+}
+
+while getopts 'h' opt; do
+  case "${opt}" in
+  h)
+    print-usage
+    exit
+    ;;
+  *)
+    print-usage >&2
+    exit 2
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [[ $# -lt 1 ]]; then
+  print-error '(idle|busy|attn|done) is required'
+fi
+
+window_state="${1}"
+
+if [[ -z "${TMUX_PANE:-}" ]]; then
+  exit
+fi
+
+case "${window_state}" in
+idle)
+  tmux set-option -u -w -t "${TMUX_PANE:-}" @window_state
+  ;;
+busy)
+  tmux set-option -w -t "${TMUX_PANE:-}" @window_state '…'
+  ;;
+attn)
+  tmux set-option -w -t "${TMUX_PANE:-}" @window_state '!'
+  ;;
+done)
+  tmux set-option -w -t "${TMUX_PANE:-}" @window_state '✓'
+  ;;
+*)
+  print-error "illegal argument -- ${window_state}"
+  ;;
+esac

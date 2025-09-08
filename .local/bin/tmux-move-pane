@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+function print-usage {
+  cat <<\EOF
+Usage:
+  tmux-move-pane up|down|left|right
+EOF
+}
+
+case "${1:-}" in
+up | down)
+  start=top
+  end=bottom
+  lo=left
+  hi=right
+  along=-v
+  across=-h
+  ;;
+left | right)
+  start=left
+  end=right
+  lo=top
+  hi=bottom
+  along=-h
+  across=-v
+  ;;
+*)
+  print-usage >&2
+  exit 2
+  ;;
+esac
+
+case "${1}" in
+up | left)
+  edge="${start}"
+  edge_before=(-b)
+  join_before=()
+  ;;
+*)
+  edge="${end}"
+  edge_before=()
+  join_before=(-b)
+  ;;
+esac
+
+neighbor="{${1}-of}"
+
+probe="$(
+  tmux if-shell -F '#{window_zoomed_flag}' 'resize-pane -Z' \; \
+    display-message -p "#D #{pane_at_${edge}}#{pane_at_${lo}}#{pane_at_${hi}} #{pane_${lo}} #{pane_${hi}}" \; \
+    display-message -p -t "${neighbor}" "#{pane_${lo}} #{pane_${hi}}"
+)"
+
+{
+  read -r pane at_edges pane_lo pane_hi
+  read -r neighbor_lo neighbor_hi
+} <<<"${probe}"
+
+if [[ "${at_edges}" == 111 ]]; then
+  exit
+elif [[ "${at_edges}" == 1* ]]; then
+  tiled="$(tmux list-panes -f '#{!:#{pane_floating_flag}}' -F '#D')"
+  mapfile -t tiled_panes <<<"${tiled}"
+  for i in "${!tiled_panes[@]}"; do
+    if [[ "${tiled_panes[i]}" == "${pane}" ]]; then
+      target="${tiled_panes[i - 1]}"
+    fi
+  done
+  tmux join-pane -s "${pane}" "${edge_before[@]}" -f "${along}" -t "${target}"
+elif [[ "${pane_lo}" -eq "${neighbor_lo}" && "${pane_hi}" -eq "${neighbor_hi}" ]]; then
+  tmux swap-pane -d -s "${pane}" -t "${neighbor}"
+elif [[ "${pane_lo}" -le "${neighbor_lo}" && "${pane_hi}" -lt "${neighbor_hi}" ]]; then
+  tmux join-pane -s "${pane}" -b "${across}" -t "${neighbor}"
+elif [[ "${pane_lo}" -gt "${neighbor_lo}" && "${pane_hi}" -ge "${neighbor_hi}" ]]; then
+  tmux join-pane -s "${pane}" "${across}" -t "${neighbor}"
+else
+  tmux join-pane -s "${pane}" "${join_before[@]}" "${along}" -t "${neighbor}"
+fi

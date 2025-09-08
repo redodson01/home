@@ -1,0 +1,7 @@
+{
+  "trustedformulae": [
+    "redodson01/tap/cmd-guard",
+    "redodson01/tap/git-better-branch",
+    "redodson01/tap/how-to-say"
+  ]
+}
