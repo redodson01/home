@@ -1,0 +1,11 @@
+#!/usr/bin/env osascript
+
+tell application "System Events"
+  tell appearance preferences
+    if dark mode then
+      return "dark"
+    else
+      return "light"
+    end if
+  end tell
+end tell
