@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+cd "$(dirname "${BASH_SOURCE[0]}")/../.."
+
+home ls-files -z |
+  xargs --null file --mime-type --no-pad |
+  rg --pcre2 --only-matching '^\.bash.*(?=: text/plain$)|^.*(?=: text/x-shellscript$)' |
+  xargs shellcheck "${@}"

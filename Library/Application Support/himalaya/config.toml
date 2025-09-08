@@ -1,0 +1,58 @@
+[accounts.givecampus]
+email = "richard.dodson@givecampus.com"
+imap.sasl.plain.authcid = "richard.dodson@givecampus.com"
+imap.sasl.plain.passwd.command = ["pass", "show", "Google/richard.dodson@givecampus.com/app-passwords/Himalaya"]
+imap.server = "imaps://imap.gmail.com:993"
+mailbox.aliases.archive = "[Gmail]/All Mail"
+mailbox.aliases.drafts = "[Gmail]/Drafts"
+mailbox.aliases.inbox = "INBOX"
+mailbox.aliases.sent = "[Gmail]/Sent Mail"
+mailbox.aliases.trash = "[Gmail]/Trash"
+smtp.sasl.plain.authcid = "richard.dodson@givecampus.com"
+smtp.sasl.plain.passwd.command = ["pass", "show", "Google/richard.dodson@givecampus.com/app-passwords/Himalaya"]
+smtp.server = "smtps://smtp.gmail.com:465"
+
+[accounts.gmail]
+email = "richard.elias.dodson@gmail.com"
+imap.sasl.plain.authcid = "richard.elias.dodson@gmail.com"
+imap.sasl.plain.passwd.command = ["pass", "show", "Google/richard.elias.dodson@gmail.com/app-passwords/Himalaya"]
+imap.server = "imaps://imap.gmail.com:993"
+mailbox.aliases.archive = "[Gmail]/All Mail"
+mailbox.aliases.drafts = "[Gmail]/Drafts"
+mailbox.aliases.inbox = "INBOX"
+mailbox.aliases.sent = "[Gmail]/Sent Mail"
+mailbox.aliases.trash = "[Gmail]/Trash"
+smtp.sasl.plain.authcid = "richard.elias.dodson@gmail.com"
+smtp.sasl.plain.passwd.command = ["pass", "show", "Google/richard.elias.dodson@gmail.com/app-passwords/Himalaya"]
+smtp.server = "smtps://smtp.gmail.com:465"
+
+[accounts.icloud-0]
+default = true
+email = "richard.elias.dodson@icloud.com"
+imap.sasl.plain.authcid = "richard.elias.dodson@icloud.com"
+imap.sasl.plain.passwd.command = ["pass", "show", "iCloud/richard.elias.dodson@icloud.com/app-specific-passwords/Himalaya"]
+imap.server = "imaps://imap.mail.me.com:993"
+mailbox.aliases.archive = "Archive"
+mailbox.aliases.drafts = "Drafts"
+mailbox.aliases.inbox = "INBOX"
+mailbox.aliases.sent = "Sent Messages"
+mailbox.aliases.trash = "Deleted Messages"
+smtp.sasl.plain.authcid = "richard.elias.dodson@icloud.com"
+smtp.sasl.plain.passwd.command = ["pass", "show", "iCloud/richard.elias.dodson@icloud.com/app-specific-passwords/Himalaya"]
+smtp.server = "smtp://smtp.mail.me.com:587"
+smtp.starttls = true
+
+[accounts.icloud-1]
+email = "richardedodson01@icloud.com"
+imap.sasl.plain.authcid = "richardedodson01@icloud.com"
+imap.sasl.plain.passwd.command = ["pass", "show", "iCloud/richardedodson01@icloud.com/app-specific-passwords/Himalaya"]
+imap.server = "imaps://imap.mail.me.com:993"
+mailbox.aliases.archive = "Archive"
+mailbox.aliases.drafts = "Drafts"
+mailbox.aliases.inbox = "INBOX"
+mailbox.aliases.sent = "Sent Messages"
+mailbox.aliases.trash = "Deleted Messages"
+smtp.sasl.plain.authcid = "richardedodson01@icloud.com"
+smtp.sasl.plain.passwd.command = ["pass", "show", "iCloud/richardedodson01@icloud.com/app-specific-passwords/Himalaya"]
+smtp.server = "smtp://smtp.mail.me.com:587"
+smtp.starttls = true
