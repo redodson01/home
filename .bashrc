@@ -80,3 +80,10 @@ if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh" ]]; then
 else
   echo ".bashrc: ${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh: No such file or directory" >&2
 fi
+
+if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh"
+else
+  echo ".bashrc: ${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh: No such file or directory" >&2
+fi
