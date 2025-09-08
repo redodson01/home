@@ -58,3 +58,16 @@ user_shell="$(dscl . -read "${HOME}" UserShell)"
 if [[ "${user_shell}" != "UserShell: ${HOMEBREW_PREFIX:?}/bin/bash" ]]; then
   sudo chsh -s "${HOMEBREW_PREFIX:?}/bin/bash" "${USER}"
 fi
+
+if [[ -f "${HOME}/.vim/autoload/plug.vim" ]]; then
+  vim -c PlugUpgrade -c quitall
+else
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+vim -c PlugUpdate -c quitall
+
+if [[ -n "${CLEAN:-}" ]]; then
+  vim -c 'PlugClean!' -c quitall
+fi
