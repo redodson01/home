@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+MODE="$(mode)"
+while sleep 1; do
+  NEXT_MODE="$(mode)"
+  if [[ "${NEXT_MODE}" != "${MODE}" ]]; then
+    if [[ $# -eq 0 ]]; then
+      echo "${NEXT_MODE}"
+    else
+      "$@" <<< "${NEXT_MODE}"
+    fi
+    MODE="${NEXT_MODE}"
+  fi
+done
