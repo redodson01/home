@@ -58,4 +58,9 @@ if command -v fzf >/dev/null; then
   eval "$(fzf --bash)"
 fi
 
+if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
