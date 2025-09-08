@@ -66,3 +66,10 @@ if command -v go >/dev/null; then
 else
   echo '.bashrc: go: command not found' >&2
 fi
+
+if command -v fzf >/dev/null; then
+  fzf="$(fzf --bash)"
+  eval "${fzf}"
+else
+  echo '.bashrc: fzf: command not found' >&2
+fi
