@@ -53,3 +53,8 @@ if command -v fzf >/dev/null; then
   fzf="$(fzf --bash)"
   eval "${fzf}"
 fi
+
+if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX:?}/etc/profile.d/bash_completion.sh"
+fi
