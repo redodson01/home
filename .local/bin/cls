@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+if [[ -z "${TMUX:-}" ]]; then
+  clear
+  clear
+else
+  tmux split-window
+  tmux kill-pane -t !
+fi
