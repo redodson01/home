@@ -1,7 +1,18 @@
 [commit]
 	gpgSign = true
+[core]
+	pager = delta
+[delta]
+	navigate = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+	required = true
+	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
 [tag]
 	gpgSign = true
 [user]
