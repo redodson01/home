@@ -53,3 +53,7 @@ if command -v go >/dev/null; then
     export PATH="${GOPATH}/bin:${PATH}"
   fi
 fi
+
+if command -v fzf >/dev/null; then
+  eval "$(fzf --bash)"
+fi
