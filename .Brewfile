@@ -1,4 +1,5 @@
 brew "bash"
+brew "fzf"
 brew "git"
 brew "gnupg"
 brew "pyenv"

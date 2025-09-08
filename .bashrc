@@ -2,6 +2,7 @@ if [[ $- != *i* ]]; then
   return
 fi
 
+export FZF_DEFAULT_OPTS='--color=16'
 export GPG_TTY="$(tty)"
 export NVM_DIR="${HOME}/.nvm"
 
@@ -35,6 +36,10 @@ if command -v rustup > /dev/null; then
   if [[ -f "${HOME}/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
   fi
+fi
+
+if command -v fzf > /dev/null; then
+  eval "$(fzf --bash)"
 fi
 
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'

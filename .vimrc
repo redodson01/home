@@ -8,6 +8,8 @@ set softtabstop=-1
 if !empty(glob('~/.vim/autoload/plug.vim'))
   call plug#begin()
   Plug 'altercation/vim-colors-solarized'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   call plug#end()
 endif
 
