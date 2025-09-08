@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+declare -A COLORS=(
+  [error]=1
+  [warn]=3
+  [info]=2
+  [debug]=4
+)
+
+function print-usage {
+  cat <<\EOF
+Usage:
+  print [-l <level>] [-t <title>] [-m <message>] [-s] [--] [<message>]
+  print -h
+EOF
+}
+
+if [[ -t 1 ]]; then
+  COLUMNS="${COLUMNS:-"$(tput cols)"}"
+  function print-message {
+    local level="${LEVEL:-info}"
+    local title="${TITLE:-"${level}"}"
+    local color="${COLORS["${level,,}"]:-0}"
+    printf '\e[0;37;4%dm %s \e[0;3%dm\uE0B0\e[0m %s\n' "${color}" "${title^^}" "${color}" "${*}"
+  }
+  function print-separator {
+    printf '%*s\n' "${COLUMNS}" '' | tr ' ' '─'
+  }
+else
+  function print-message {
+    local level="${LEVEL:-info}"
+    local title="${TITLE:-"${level}"}"
+    printf '[%s] %s\n' "${title^^}" "${*}"
+  }
+  function print-separator {
+    echo '----'
+  }
+fi
+
+while getopts 'hl:m:st:' opt; do
+  case "${opt}" in
+  h)
+    print-usage
+    exit
+    ;;
+  l)
+    LEVEL="${OPTARG}"
+    TITLE="${OPTARG}"
+    ;;
+  m)
+    print-message "${OPTARG}"
+    ;;
+  s)
+    print-separator
+    ;;
+  t)
+    TITLE="${OPTARG}"
+    ;;
+  *)
+    print-usage >&2
+    exit 2
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [[ $# -gt 0 ]]; then
+  print-message "${@}"
+fi
