@@ -1,4 +1,5 @@
 brew "bash"
+brew "fzf"
 brew "gnupg"
 brew "go"
 brew "pass"

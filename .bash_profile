@@ -48,3 +48,8 @@ if command -v go >/dev/null; then
     export PATH="${PATH}:${GOPATH}/bin"
   fi
 fi
+
+if command -v fzf >/dev/null; then
+  fzf="$(fzf --bash)"
+  eval "${fzf}"
+fi
