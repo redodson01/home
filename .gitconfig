@@ -1,3 +1,20 @@
+[alias]
+	b = branch --verbose --verbose
+	ba = b --all
+	br = b --remotes
+	cf = config list
+	d = diff
+	dc = d --cached
+	dcn = dc --name-only
+	dn = d --name-only
+	l = log --oneline
+	lf = l --first-parent
+	ls = l --graph
+	r = remote --verbose
+	s = status
+	sh = show --oneline
+	shn = sh --name-only
+	st = stash list
 [commit]
 	gpgSign = true
 [filter "lfs"]
