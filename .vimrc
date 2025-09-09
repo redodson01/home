@@ -1,9 +1,23 @@
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 
+set clipboard=unnamed
+set colorcolumn=81
+set cursorline
 set expandtab
+set hlsearch
+set ignorecase
+set number
 set shiftwidth=2
+set smartcase
 set softtabstop=-1
+
+nnoremap <Leader><Esc> :nohlsearch<Enter>
+nnoremap <Leader>a     :Ag<Enter>
+nnoremap <Leader>b     :Buffers<Enter>
+nnoremap <Leader>f     :Files<Enter>
+nnoremap <Leader>g     :GitFiles<Enter>
+nnoremap <Leader>r     :Rg<Enter>
 
 if !empty(glob('~/.vim/autoload/plug.vim'))
   call plug#begin()
