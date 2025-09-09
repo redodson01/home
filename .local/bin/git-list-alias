@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+readonly GIT="${1:-"${GIT:-git}"}"
+
+echo "alias ${GIT:0:1}='${GIT}'"
+
+git config list \
+  | sed -En -e "s/^alias\\.([-0-9A-Z_a-z]+)=(.*)$/alias ${GIT:0:1}\\1='${GIT} \\2'/p"

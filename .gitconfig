@@ -1,7 +1,40 @@
+[alias]
+	a    = add
+	au   = add --update
+	b    = branch --verbose --verbose
+	ba   = branch --verbose --verbose --all
+	c    = commit
+	ca   = commit --amend
+	cf   = config list
+	ch   = checkout
+	d    = diff
+	dc   = diff --cached
+	dcn  = diff --cached --name-only
+	dcns = diff --cached --name-status
+	dn   = diff --name-only
+	dns  = diff --name-status
+	la   = log --topo-order --oneline --all
+	lf   = log --topo-order --oneline --first-parent
+	lg   = log --topo-order --oneline --graph
+	ln   = log --topo-order --oneline --name-only
+	lns  = log --topo-order --oneline --name-status
+	lr   = log --topo-order --oneline --reverse
+	ls   = log --topo-order --oneline
+	r    = remote --verbose
+	s    = status
+	sh   = show --oneline
+	shf  = show --oneline --first-parent
+	shn  = show --oneline --name-only
+	shns = show --oneline --name-status
+	st   = stash list
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RF
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
