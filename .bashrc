@@ -22,3 +22,5 @@ if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/z.sh" ]]; then
 fi
 
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
+alias la='ls -A'
+alias ls='ls -FGhl'
