@@ -5,6 +5,7 @@ GPG_TTY="$(tty)"
 export GPG_TTY
 export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
+export PROMPT_COMMAND='clean-history'
 
 if command -v /opt/homebrew/bin/brew >/dev/null; then
   brew_shellenv="$(/opt/homebrew/bin/brew shellenv bash)"
@@ -73,3 +74,22 @@ fi
 if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
   export CIRCLECI_TOKEN
 fi
+
+function dedup-history {
+  # shellcheck disable=SC2312
+  sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
+}
+
+function clean-history {
+  history -a
+  local hist
+  hist="$(
+    # shellcheck disable=SC2312
+    sed -e 's/^[ ]*//' -e 's/[ ]*$//' -e '/^$/d' "${HISTFILE}" |
+      nl |
+      dedup-history
+  )"
+  echo "${hist}" >"${HISTFILE}"
+  history -c
+  history -r
+}
