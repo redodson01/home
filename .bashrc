@@ -52,4 +52,7 @@ if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/z.sh" ]]; then
   source "${HOMEBREW_PREFIX}/etc/profile.d/z.sh"
 fi
 
+alias be='bundle exec'
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
+alias la='ls -A'
+alias ls='ls -FGhl'
