@@ -62,6 +62,9 @@ alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
 alias la='ls -A'
 alias ls='ls -FGhl'
 
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
 function git-ps1 {
   local PREFIX=$'\[\e[0;1;37;44m\] \W \[\e[0;34m\]\uE0B0\[\e[0m\]'
   local SUFFIX=$' '
