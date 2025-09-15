@@ -10,6 +10,9 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   Plug 'altercation/vim-colors-solarized'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
   call plug#end()
 endif
 
