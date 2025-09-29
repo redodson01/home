@@ -1,5 +1,7 @@
 [commit]
 	gpgSign = true
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RF
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -7,6 +9,8 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
 [user]
 	email = richardedodson01@icloud.com
 	name = Richard E. Dodson
