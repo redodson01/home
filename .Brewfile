@@ -1,5 +1,6 @@
 brew "bash"
 brew "bash-completion@2"
+brew "diff-so-fancy"
 brew "fzf"
 brew "git"
 brew "git-lfs"
