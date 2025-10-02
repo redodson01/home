@@ -12,6 +12,8 @@ set shiftwidth=2
 set smartcase
 set softtabstop=-1
 
+nnoremap <Leader><Esc> :nohlsearch<Enter>
+
 if !empty(glob('~/.vim/autoload/plug.vim'))
   call plug#begin()
   Plug 'altercation/vim-colors-solarized'
