@@ -5,6 +5,8 @@ fi
 export FZF_DEFAULT_OPTS='--color=16'
 export GPG_TTY="$(tty)"
 export NVM_DIR="${HOME}/.nvm"
+export PATH="${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/.local/sbin:${PATH}"
 
 if command -v /opt/homebrew/bin/brew > /dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
