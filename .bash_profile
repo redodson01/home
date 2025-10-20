@@ -14,3 +14,12 @@ if command -v rbenv >/dev/null; then
   rbenv_init="$(rbenv init - --no-rehash bash)"
   eval "${rbenv_init}"
 fi
+
+if command -v pyenv >/dev/null; then
+  export PYENV_ROOT="${HOME}/.pyenv"
+  if [[ -d "${PYENV_ROOT}/bin" ]]; then
+    export PATH="${PYENV_ROOT}/bin:${PATH}"
+  fi
+  pyenv_init="$(pyenv init - bash)"
+  eval "${pyenv_init}"
+fi

@@ -1,6 +1,7 @@
 brew "bash"
 brew "gnupg"
 brew "pass"
+brew "pyenv"
 brew "rbenv"
 brew "shellcheck"
 brew "shfmt"
