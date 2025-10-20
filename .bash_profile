@@ -9,3 +9,8 @@ if command -v /opt/homebrew/bin/brew >/dev/null; then
   brew_shellenv="$(/opt/homebrew/bin/brew shellenv bash)"
   eval "${brew_shellenv}"
 fi
+
+if command -v rbenv >/dev/null; then
+  rbenv_init="$(rbenv init - --no-rehash bash)"
+  eval "${rbenv_init}"
+fi

@@ -1,6 +1,7 @@
 brew "bash"
 brew "gnupg"
 brew "pass"
+brew "rbenv"
 brew "shellcheck"
 brew "shfmt"
 cask "firefox"
