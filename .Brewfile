@@ -1,6 +1,7 @@
 brew "bash"
 brew "git"
 brew "gnupg"
+brew "rbenv"
 brew "vim"
 cask "firefox"
 cask "iterm2"
