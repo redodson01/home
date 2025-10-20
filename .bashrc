@@ -14,4 +14,8 @@ if command -v "${HOMEBREW_PREFIX}/bin/brew" >/dev/null; then
   eval "$("${HOMEBREW_PREFIX}/bin/brew" shellenv bash)"
 fi
 
+if command -v rbenv >/dev/null; then
+  eval "$(rbenv init - --no-rehash bash)"
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
