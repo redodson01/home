@@ -15,3 +15,10 @@ if command -v /opt/homebrew/bin/brew >/dev/null; then
 else
   echo '.bashrc: /opt/homebrew/bin/brew: command not found' >&2
 fi
+
+if command -v rbenv >/dev/null; then
+  rbenv_init="$(rbenv init - --no-rehash bash)"
+  eval "${rbenv_init}"
+else
+  echo '.bashrc: rbenv: command not found' >&2
+fi
