@@ -13,3 +13,7 @@ export PATH="${HOME}/.local/bin:${PATH}"
 if command -v "${HOMEBREW_PREFIX}/bin/brew" >/dev/null; then
   eval "$("${HOMEBREW_PREFIX}/bin/brew" shellenv bash)"
 fi
+
+if command -v rbenv >/dev/null; then
+  eval "$(rbenv init - --no-rehash bash)"
+fi
