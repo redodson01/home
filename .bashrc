@@ -22,4 +22,10 @@ if command -v pyenv > /dev/null; then
   eval "$(pyenv init - bash)"
 fi
 
+if command -v rustup > /dev/null; then
+  if [[ -f "${HOME}/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+  fi
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
