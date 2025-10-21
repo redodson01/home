@@ -92,3 +92,16 @@ if command -v nvm >/dev/null; then
   nvm install --lts --latest-npm
   nvm alias default 'lts/*'
 fi
+
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+fi
+
+if command -v rustup >/dev/null; then
+  rustup update
+else
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --yes --no-modify-path
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+fi
