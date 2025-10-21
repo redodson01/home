@@ -32,4 +32,8 @@ if [[ -s "$NVM_DIR/bash_completion" ]]; then
   source "$NVM_DIR/bash_completion"
 fi
 
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  source "$HOME/.cargo/env"
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
