@@ -50,3 +50,10 @@ if [[ -s "$NVM_DIR/bash_completion" ]]; then
 else
   echo ".bashrc: $NVM_DIR/bash_completion: No such file or directory" >&2
 fi
+
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+else
+  echo ".bashrc: ${HOME}/.cargo/env: No such file or directory" >&2
+fi
