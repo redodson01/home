@@ -54,3 +54,9 @@ else
 fi
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+
+if command -v rustup > /dev/null; then
+  rustup update
+else
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+fi
