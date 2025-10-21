@@ -40,3 +40,8 @@ if [[ -s "$NVM_DIR/bash_completion" ]]; then
   # shellcheck source=/dev/null
   source "$NVM_DIR/bash_completion"
 fi
+
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  # shellcheck source=/dev/null
+  source "${HOME}/.cargo/env"
+fi
