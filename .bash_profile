@@ -2,10 +2,14 @@
 
 GPG_TTY="$(tty)"
 
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GPG_TTY
 export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
-export PROMPT_COMMAND='clean-history'
+export PROMPT_COMMAND='git-ps1; clean-history'
 
 if command -v /opt/homebrew/bin/brew >/dev/null; then
   brew_shellenv="$(/opt/homebrew/bin/brew shellenv bash)"
@@ -92,4 +96,14 @@ function clean-history {
   echo "${hist}" >"${HISTFILE}"
   history -c
   history -r
+}
+
+function git-ps1 {
+  if [[ $? -eq 0 ]]; then
+    local prefix=$'\[\\e[0;34m\]\[\\e[0;97;44m\] \W \[\\e[0;34;42m\]\[\\e[0;97;42m\] ✓ \[\\e[0;32m\]\[\\e[0m\]'
+  else
+    local prefix=$'\[\\e[0;34m\]\[\\e[0;97;44m\] \W \[\\e[0;34;41m\]\[\\e[0;97;41m\] ✕ \[\\e[0;31m\]\[\\e[0m\]'
+  fi
+  local suffix=$' $ '
+  __git_ps1 "${prefix}" "${suffix}"
 }
