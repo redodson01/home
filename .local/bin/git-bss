@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+print -s
+
+if tmux ls >/dev/null 2>&1; then
+  tmux list-sessions -O creation
+  print -s
+fi
+
+git better-branch
+
+print -s
+
+git status
+
+print -s
+
+stash_list="$(git stash list)"
+
+if [[ -n "${stash_list}" ]]; then
+  cat <<<"${stash_list}"
+  print -s
+fi
