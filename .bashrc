@@ -81,6 +81,9 @@ alias la='ls -A'
 alias ls='ls -FGhl'
 alias watch='hwatch --color --no-title --use-pty --interval 1 --limit 10'
 
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
 function dedup-history {
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
 }
