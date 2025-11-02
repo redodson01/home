@@ -79,6 +79,9 @@ alias la='ls -A'
 alias ls='ls -FGhl'
 alias watch='hwatch --color --no-title --use-pty --limit 10'
 
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
 function git-ps1 {
   local PREFIX=$'\[\\e[0;37;44m\] \W \[\\e[0;34m\]\uE0B0\[\\e[0m\]'
   local SUFFIX=$' $ '
