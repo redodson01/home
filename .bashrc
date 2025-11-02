@@ -80,6 +80,9 @@ alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
 alias la='ls -A'
 alias ls='ls -FGhl'
 
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
 function dedup-history {
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
 }

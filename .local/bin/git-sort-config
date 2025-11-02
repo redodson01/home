@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+GITCONFIG="${1:-"${GITCONFIG:-"${HOME}/.gitconfig"}"}"
+
+# Adapted from: https://wizardsoftheweb.pro/sort-git-config
+awk -F '\t' '$1 { table = $1 } $2 { print (table ~ /^\[include/ ? 1 : 0) "\t" table "\t" $2 }' <"${GITCONFIG}" |
+  LC_COLLATE=C sort --unique |
+  awk -F '\t' '$2 { if (table != $2) { table = $2; print $2 } } $3 { print "\t" $3 }' |
+  sponge "${GITCONFIG}"

@@ -1,0 +1,5 @@
+[alias]
+	bootstrap = !home-bootstrap
+	check = !home-check
+	fmt = !home-fmt
+	watch = !watch git --no-optional-locks
