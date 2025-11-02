@@ -1,9 +1,13 @@
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = delta
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -13,6 +17,8 @@
 	defaultBranch = main
 [interactive]
 	diffFilter = delta --color-only
+[rebase]
+	autoSquash = true
 [tag]
 	gpgSign = true
 [user]
