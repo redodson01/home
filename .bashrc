@@ -82,6 +82,9 @@ alias la='ls -A'
 alias ls='ls -FGhl'
 alias reset='reset && clear'
 
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
 function dedup-history {
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
 }

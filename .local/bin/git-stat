@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+print -s
+
+git better-branch
+
+print -s
+
+git status
+
+print -s
+
+stash_list="$(git stash list)"
+
+if [[ -n "${stash_list}" ]]; then
+  cat <<<"${stash_list}"
+  print -s
+fi

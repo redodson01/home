@@ -1,11 +1,61 @@
+[alias]
+	a    = add
+	au   = add --update
+	b    = better-branch
+	ba   = better-branch --all
+	ch   = checkout
+	d    = diff
+	dc   = diff --cached
+	dcn  = diff --cached --name-only
+	dcnu = diff --cached --name-only @{upstream}
+	dcs  = diff --cached --name-status
+	dcsu = diff --cached --name-status @{upstream}
+	dcu  = diff --cached @{upstream}
+	dn   = diff --name-only
+	dnu  = diff --name-only @{upstream}
+	ds   = diff --name-status
+	dsu  = diff --name-status @{upstream}
+	du   = diff @{upstream}
+	l    = log --topo-order --oneline
+	lf   = log --topo-order --oneline --first-parent
+	lfu  = log --topo-order --oneline --first-parent @{upstream}
+	lg   = log --topo-order --oneline --graph
+	lgu  = log --topo-order --oneline --graph @{upstream}
+	ln   = log --topo-order --oneline --name-only
+	lnu  = log --topo-order --oneline --name-only @{upstream}
+	lr   = log --topo-order --oneline --reverse
+	lru  = log --topo-order --oneline --reverse @{upstream}
+	ls   = log --topo-order --oneline --name-status
+	lsu  = log --topo-order --oneline --name-status @{upstream}
+	lu   = log --topo-order --oneline @{upstream}
+	rdu  = range-diff @{upstream}...
+	s    = status
+	sh   = show --oneline
+	shf  = show --oneline --first-parent
+	shfu = show --oneline --first-parent @{upstream}
+	shn  = show --oneline --name-only
+	shnu = show --oneline --name-only @{upstream}
+	shs  = show --oneline --name-status
+	shsu = show --oneline --name-status @{upstream}
+	shu  = show --oneline @{upstream}
+	ss   = status --short --branch
+	st   = stat
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = delta
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
 [delta]
 	navigate = true
+[diff "json"]
+	textconv = bash -c 'jq < \"${0}\"'
+[diff "mozlz4"]
+	textconv = bash -c 'mozlz4 --decode < \"${0}\" | jq'
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -20,5 +70,11 @@
 [user]
 	email = richardedodson01@icloud.com
 	name = Richard E. Dodson
+[includeIf "gitdir:.git"]
+	path = ~/.gitconfig-default
+[includeIf "gitdir:.git/**"]
+	path = ~/.gitconfig-default
+[includeIf "gitdir:~/.local/share/home"]
+	path = ~/.gitconfig-home
 [includeIf "hasconfig:remote.*.url:git@github.com:givecampus/**"]
 	path = ~/.gitconfig-givecampus
