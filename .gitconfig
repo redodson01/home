@@ -1,11 +1,38 @@
+[alias]
+	a    = add
+	au   = add --update
+	b    = better-branch
+	ba   = better-branch --all
+	ch   = checkout
+	d    = diff
+	dc   = diff --cached
+	dcn  = diff --cached --name-only
+	dcs  = diff --cached --name-status
+	dn   = diff --name-only
+	ds   = diff --name-status
+	l    = log --topo-order --oneline
+	lf   = log --topo-order --oneline --first-parent
+	lg   = log --topo-order --oneline --graph
+	ln   = log --topo-order --oneline --name-only
+	lr   = log --topo-order --oneline --reverse
+	ls   = log --topo-order --oneline --name-status
+	s    = status
+	sh   = show --oneline
+	shf  = show --oneline --first-parent
+	shn  = show --oneline --name-only
+	shs  = show --oneline --name-status
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = delta
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
 [delta]
 	navigate = true
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -20,5 +47,11 @@
 [user]
 	email = richardedodson01@icloud.com
 	name = Richard E. Dodson
+[includeIf "gitdir:.git"]
+	path = ~/.gitconfig-default
+[includeIf "gitdir:.git/**"]
+	path = ~/.gitconfig-default
+[includeIf "gitdir:~/.local/share/home"]
+	path = ~/.gitconfig-home
 [includeIf "hasconfig:remote.*.url:git@github.com:givecampus/**"]
 	path = ~/.gitconfig-givecampus
