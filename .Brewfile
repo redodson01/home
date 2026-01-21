@@ -5,6 +5,7 @@ brew "pass"
 brew "shellcheck"
 brew "shfmt"
 brew "vim"
+cask "firefox"
 cask "font-meslo-lg-nerd-font"
 cask "iterm2"
 tap "redodson01/tap", trusted: true
