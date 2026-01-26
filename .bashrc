@@ -8,6 +8,7 @@ fi
 
 export GPG_TTY="$(tty)"
 export HOMEBREW_PREFIX=/opt/homebrew
+export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
 
 if command -v "${HOMEBREW_PREFIX}/bin/brew" >/dev/null; then
@@ -26,6 +27,18 @@ if command -v pyenv >/dev/null; then
   fi
 
   eval "$(pyenv init - bash)"
+fi
+
+# shellcheck disable=SC2250
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "$NVM_DIR/nvm.sh"
+fi
+
+# shellcheck disable=SC2250
+if [[ -s "$NVM_DIR/bash_completion" ]]; then
+  # shellcheck source=/dev/null
+  source "$NVM_DIR/bash_completion"
 fi
 
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
