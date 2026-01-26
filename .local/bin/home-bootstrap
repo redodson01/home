@@ -8,6 +8,8 @@ if [[ -n "${DEBUG:-}" ]]; then
   set -o xtrace
 fi
 
+export NVM_DIR="${HOME}/.nvm"
+
 if [[ ! -d "${HOME}/.ssh" ]]; then
   local_host_name="$(scutil --get LocalHostName)"
   git clone --branch="${local_host_name}" https://github.com/redodson01/.ssh.git "${HOME}/.ssh"
@@ -70,4 +72,23 @@ vim -c PlugUpdate -c quitall
 
 if [[ -n "${CLEAN:-}" ]]; then
   vim -c 'PlugClean!' -c quitall
+fi
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+
+# shellcheck disable=SC2250
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  # shellcheck source=/dev/null
+  source "$NVM_DIR/nvm.sh"
+fi
+
+# shellcheck disable=SC2250
+if [[ -s "$NVM_DIR/bash_completion" ]]; then
+  # shellcheck source=/dev/null
+  source "$NVM_DIR/bash_completion"
+fi
+
+if command -v nvm >/dev/null; then
+  nvm install --lts --latest-npm
+  nvm alias default 'lts/*'
 fi
