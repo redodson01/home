@@ -72,3 +72,5 @@ vim -c PlugUpdate -c quitall
 if [[ -n "${CLEANUP:-}" ]]; then
   vim -c 'PlugClean!' -c quitall
 fi
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
