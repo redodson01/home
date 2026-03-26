@@ -961,6 +961,19 @@
 			</array>
 			<key>Keyboard Map</key>
 			<dict>
+				<key>0x60-0x100000-0x32</key>
+				<dict>
+					<key>Action</key>
+					<integer>11</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>0x02</string>
+					<key>Version</key>
+					<integer>2</integer>
+				</dict>
 				<key>0x7f-0x100000</key>
 				<dict>
 					<key>Action</key>
@@ -974,6 +987,19 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x1b 0x7f</string>
+				</dict>
+				<key>0xd-0x20000-0x24</key>
+				<dict>
+					<key>Action</key>
+					<integer>11</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>0x1b 0x0d</string>
+					<key>Version</key>
+					<integer>2</integer>
 				</dict>
 				<key>0xf702-0x280000</key>
 				<dict>
@@ -2059,6 +2085,19 @@
 			</array>
 			<key>Keyboard Map</key>
 			<dict>
+				<key>0x60-0x100000-0x32</key>
+				<dict>
+					<key>Action</key>
+					<integer>11</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>0x02</string>
+					<key>Version</key>
+					<integer>2</integer>
+				</dict>
 				<key>0x7f-0x100000</key>
 				<dict>
 					<key>Action</key>
@@ -2072,6 +2111,19 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x1b 0x7f</string>
+				</dict>
+				<key>0xd-0x20000-0x24</key>
+				<dict>
+					<key>Action</key>
+					<integer>11</integer>
+					<key>Apply Mode</key>
+					<integer>0</integer>
+					<key>Escaping</key>
+					<integer>2</integer>
+					<key>Text</key>
+					<string>0x1b 0x0d</string>
+					<key>Version</key>
+					<integer>2</integer>
 				</dict>
 				<key>0xf702-0x280000</key>
 				<dict>
