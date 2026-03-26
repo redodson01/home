@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+pane_id="$(tmux display-message -p '#D')"
+tmux split-window -t "${pane_id}"
+tmux kill-pane -t "${pane_id}"
