@@ -84,6 +84,14 @@ alias watch='hwatch --color --no-title --use-pty --interval 1 --limit 10'
 eval "$(git list-alias git)"
 eval "$(git list-alias home)"
 
+if [[ -n "${TMUX}" ]]; then
+  function tmux-resize-panes {
+    tmux list-panes -a -F '#{pane_id}' -f '#{!:#{window_zoomed_flag}}' |
+      xargs -L 1 tmux select-layout -E -t
+  }
+  trap tmux-resize-panes WINCH
+fi
+
 function dedup-history {
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
 }
