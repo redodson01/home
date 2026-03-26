@@ -116,6 +116,15 @@ git_list_alias_home="$(git list-alias home)"
 eval "${git_list_alias_git}"
 eval "${git_list_alias_home}"
 
+if [[ -n "${TMUX}" ]]; then
+  function tmux-resize-panes {
+    # shellcheck disable=SC2312
+    tmux list-panes -a -F '#D' -f '#{!:#{window_zoomed_flag}}' |
+      xargs -L 1 tmux select-layout -E -t
+  }
+  trap tmux-resize-panes WINCH
+fi
+
 function dedup-history {
   # shellcheck disable=SC2312
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
