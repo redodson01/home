@@ -10,6 +10,7 @@ brew "pass"
 brew "pinentry-mac"
 brew "pyenv"
 brew "rbenv"
+brew "redodson01/tap/cmd-guard", trusted: true
 brew "tmux"
 brew "vim"
 brew "z"
