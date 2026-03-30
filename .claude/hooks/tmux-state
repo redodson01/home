@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Sets the tmux window-scoped @claude_marker user option so the status line
+# can render an "is Claude waiting on me" indicator. See ~/.tmux.conf for the
+# format string. Invoked from hooks in ~/.claude/settings.json with one of:
+#   idle | busy | attn
+
+# Tweak the marker strings here.
+MARKER_BUSY='…'
+MARKER_ATTN='!'
+MARKER_IDLE=''
+
+[ -n "$TMUX" ] || exit 0
+
+case "$1" in
+  idle) tmux set-option -w -t "$TMUX_PANE" @claude_marker "$MARKER_IDLE" 2>/dev/null ;;
+  busy) tmux set-option -w -t "$TMUX_PANE" @claude_marker "$MARKER_BUSY" 2>/dev/null ;;
+  attn) tmux set-option -w -t "$TMUX_PANE" @claude_marker "$MARKER_ATTN" 2>/dev/null ;;
+  *)    exit 0 ;;
+esac
+
+tmux refresh-client -S 2>/dev/null || true
