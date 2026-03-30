@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+function print-usage {
+  cat <<\EOF
+Usage:
+  tmux-new-session [--] <session>
+  tmux-new-session -h
+EOF
+}
+
+while getopts 'h' opt; do
+  case "${opt}" in
+  h)
+    print-usage
+    exit
+    ;;
+  *)
+    print-usage >&2
+    exit 2
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [[ $# -lt 1 ]]; then
+  echo 'Error: <session> required'
+  print-usage >&2
+  exit 2
+fi
+
+session="${1}"
+toplevel="$(git rev-parse --show-toplevel)"
+worktree="$(basename "${toplevel}")"
+
+tmux new-session -d -n "${worktree}" -s "${session}"
+tmux split-window -d -h -t "${session}" claude --name="${worktree}"
+tmux split-window -d -t "${session}" git watch bss
+tmux attach-session -t "${session}"
