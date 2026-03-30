@@ -1,0 +1,52 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "09b170f1-8fc3-471e-b28a-1bf3557a1faa",
+        "type": "model"
+      },
+      {
+        "id": "e1ccc9a0-be2f-49b3-a789-88f47a5facff",
+        "type": "separator"
+      },
+      {
+        "id": "b554d244-321e-4890-aed4-bcab24a73a6d",
+        "type": "thinking-effort"
+      },
+      {
+        "id": "2a552eb2-5c1b-42c3-b509-b56d6fd4b0ea",
+        "type": "separator"
+      },
+      {
+        "id": "631fc6c1-9eeb-4ce3-a2d3-e7b3f537e51b",
+        "type": "context-bar"
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "defaultPaddingSide": "both",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "pinned",
+    "installedVersion": "2.2.27"
+  }
+}

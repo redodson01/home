@@ -1,0 +1,146 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+function print-usage {
+  cat <<\EOF
+Usage:
+  tmux-new-task [-acs] [-b <branch>] [-l <layout>] [--] <name> [<commit>]
+  tmux-new-task -h
+EOF
+}
+
+function tmux-new-panes {
+  if [[ "${layout}" -ge 2 ]]; then
+    local claude_args=()
+    if [[ -n "${claude}" ]]; then
+      claude_args+=(claude --name="${window_name}")
+      if [[ -n "${worktree}" ]]; then
+        claude_args+=(--worktree="${window_name}")
+      fi
+    fi
+    local claude_pane_id
+    claude_pane_id="$(tmux split-window -d -h -P -c "${start_directory}" -F '#{pane_id}' -t "${pane_id}" "${claude_args[@]}")"
+  fi
+  if [[ "${layout}" -ge 3 ]]; then
+    local status_args=()
+    if [[ -n "${status}" && -n "${toplevel}" ]]; then
+      status_args+=(git)
+      if [[ -n "${GIT_DIR:-}" ]]; then
+        status_args+=(--git-dir="${GIT_DIR}")
+      fi
+      if [[ -n "${GIT_WORK_TREE:-}" ]]; then
+        status_args+=(--work-tree="${GIT_WORK_TREE}")
+      fi
+      status_args+=(watch bss)
+    fi
+    tmux split-window -d -c "${start_directory}" -t "${pane_id}" "${status_args[@]}"
+  fi
+  if [[ "${layout}" -ge 4 ]]; then
+    tmux split-window -d -c "${start_directory}" -t "${claude_pane_id}"
+  fi
+}
+
+claude=
+status=
+branch=
+layout=1
+commit=
+toplevel=
+worktree=
+
+while getopts 'acsb:l:h' opt; do
+  case "${opt}" in
+  a)
+    claude=1
+    status=1
+    ;;
+  c)
+    claude=1
+    ;;
+  s)
+    status=1
+    ;;
+  b)
+    branch="${OPTARG}"
+    ;;
+  l)
+    if [[ ! "${OPTARG}" =~ ^[1-4]$ ]]; then
+      echo 'Error: <layout> must be 1-4' >&2
+      print-usage >&2
+      exit 2
+    fi
+    layout="${OPTARG}"
+    ;;
+  h)
+    print-usage
+    exit
+    ;;
+  *)
+    print-usage >&2
+    exit 2
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [[ -n "${claude}" && "${layout}" -lt 2 ]]; then
+  layout=2
+fi
+
+if [[ -n "${status}" && "${layout}" -lt 3 ]]; then
+  layout=3
+fi
+
+if [[ $# -eq 0 ]]; then
+  echo 'Error: <name> is required' >&2
+  print-usage >&2
+  exit 2
+fi
+
+name="${1}"
+
+if [[ $# -ge 2 ]]; then
+  commit="${2}"
+fi
+
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  toplevel="$(git rev-parse --show-toplevel)"
+fi
+
+if [[ -z "${TMUX:-}" ]]; then
+  session_name="${name}"
+  start_directory="${toplevel:-"${PWD}"}"
+  window_name="$(basename "${start_directory}")"
+  pane_id="$(tmux new-session -d -P -c "${start_directory}" -F '#{pane_id}' -n "${window_name}" -s "${session_name}")"
+  tmux-new-panes
+  tmux attach-session -t "${pane_id}"
+else
+  window_name="${name}"
+  bare_repository="$(git config get --default=false core.bare)"
+  if [[ -n "${toplevel}" && "${bare_repository}" != true ]]; then
+    worktree="${toplevel}/.claude/worktrees/${window_name}"
+    if [[ ! -d "${worktree}" ]]; then
+      worktree_args=()
+      if [[ -n "${branch}" ]]; then
+        worktree_args+=(-b "${branch}")
+      fi
+      worktree_args+=("${worktree}")
+      if [[ -n "${commit}" ]]; then
+        worktree_args+=("${commit}")
+      fi
+      git worktree add "${worktree_args[@]}"
+    fi
+  fi
+  start_directory="${worktree:-"${toplevel:-"${PWD}"}"}"
+  pane_id="$(tmux new-window -d -P -c "${start_directory}" -F '#{pane_id}' -n "${window_name}")"
+  tmux-new-panes
+  tmux select-window -t "${pane_id}"
+fi
