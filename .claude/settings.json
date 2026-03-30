@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash"
+      "Bash",
+      "Read(//Users/rich/.claude/commands/review.md)"
     ]
   },
   "hooks": {
@@ -15,6 +16,58 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux-set-window-state busy"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux-set-window-state idle"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux-set-window-state attn"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux-set-window-state busy"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tmux-set-window-state busy"
+          }
+        ]
+      }
     ]
-  }
+  },
+  "tui": "fullscreen",
+  "theme": "auto"
 }
