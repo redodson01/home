@@ -1,0 +1,2 @@
+*.json diff=json
+*.mozlz4 diff=mozlz4
