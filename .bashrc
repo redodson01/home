@@ -7,11 +7,17 @@ if [[ $- != *i* ]]; then
 fi
 
 export CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"
+export FZF_DEFAULT_OPTS_FILE="${HOME}/.fzfrc"
 export GITHUB_PACKAGES_TOKEN="$(gh auth token)"
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GPG_TTY="$(tty)"
 export HOMEBREW_PREFIX=/opt/homebrew
 export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
+export PROMPT_COMMAND='git-ps1'
 
 if command -v "${HOMEBREW_PREFIX}/bin/brew" >/dev/null; then
   eval "$("${HOMEBREW_PREFIX}/bin/brew" shellenv bash)"
@@ -71,3 +77,24 @@ if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/z.sh" ]]; then
 fi
 
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'
+alias la='ls -A'
+alias ls='ls -FGhl'
+alias watch='hwatch --color --no-title --use-pty --interval 1 --limit 10'
+
+eval "$(git list-alias git)"
+eval "$(git list-alias home)"
+
+if [[ -n "${TMUX}" ]]; then
+  function tmux-resize-panes {
+    tmux list-panes -a -F '#{pane_id}' -f '#{!:#{window_zoomed_flag}}' |
+      xargs -L 1 tmux select-layout -E -t
+  }
+  trap tmux-resize-panes WINCH
+fi
+
+function git-ps1 {
+  local PREFIX=$'\[\\e[0;37;44m\] \W \[\\e[0;34m\]\uE0B0\[\\e[0m\]'
+  local SUFFIX=$' $ '
+
+  __git_ps1 "${PREFIX}" "${SUFFIX}"
+}
