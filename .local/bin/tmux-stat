@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+print -s
+
+client_color=
+window_attn_color=
+window_done_color=
+window_busy_color=
+reset_color=
+
+if [[ -t 1 ]]; then
+  client_color=$'\e[1;7;91m'
+  window_attn_color=$'\e[31m'
+  window_done_color=$'\e[32m'
+  window_busy_color=$'\e[33m'
+  reset_color=$'\e[0m'
+fi
+
+client_session_name="$(tmux display-message -p -- '#{client_session}')"
+client_format="#{?#{==:#{session_name},${client_session_name}},${client_color}}"
+
+if tmux list-sessions -F "- #{?session_attached,${client_format}}#S: #{session_windows} windows#{?session_attached, (attached)}${reset_color}#{W:"$'\n'"#{?loop_last_flag,└─> ,├─> }+ #{?window_active_clients,${client_format}}#{?#{==:#{@window_state},!},${window_attn_color},#{==:#{@window_state},✓},${window_done_color},#{==:#{@window_state},…},${window_busy_color}}#I: #W#{?#F,#F}#{?@window_state,#{@window_state}}${reset_color}}" -O creation 2>/dev/null; then
+  print -s
+fi
