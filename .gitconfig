@@ -1,9 +1,22 @@
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = delta
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
+[delta]
+	file-decoration-style = dim ol ul
+	file-modified-label = modified:
+	file-style = dim
+	hunk-header-decoration-style = dim
+	hunk-header-style = dim italic
+	hunk-label = @@
+	navigate = true
+	syntax-theme = vim-solarized8-dark
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -13,6 +26,8 @@
 	defaultBranch = main
 [interactive]
 	diffFilter = delta --color-only
+[rebase]
+	autoSquash = true
 [tag]
 	gpgSign = true
 [user]
