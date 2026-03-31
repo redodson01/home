@@ -4,11 +4,13 @@
 
 # Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
 # for a list of all available themes
-#--theme="TwoDark"
+--theme="auto:system"
+--theme-dark="vim-solarized8-dark"
+--theme-light="vim-solarized8-light"
 
 # Enable this to use italic text on the terminal. This is not supported on all
 # terminal emulators (like tmux, by default):
-#--italic-text=always
+--italic-text=always
 
 # Uncomment the following line to disable automatic paging:
 #--paging=never
