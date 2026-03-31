@@ -2,9 +2,14 @@
 
 GPG_TTY="$(tty)"
 
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GPG_TTY
 export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
+export PROMPT_COMMAND='git-ps1; clean-history'
 
 if command -v /opt/homebrew/bin/brew >/dev/null; then
   brew_shellenv="$(/opt/homebrew/bin/brew shellenv bash)"
@@ -73,3 +78,42 @@ fi
 if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
   export CIRCLECI_TOKEN
 fi
+
+if [[ -n "${TMUX}" ]]; then
+  trap tmux-resize-panes WINCH
+fi
+
+function dedup-history {
+  # shellcheck disable=SC2312
+  sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
+}
+
+function clean-history {
+  history -a
+  local hist
+  hist="$(
+    # shellcheck disable=SC2312
+    sed -e 's/^[ ]*//' -e 's/[ ]*$//' -e '/^$/d' "${HISTFILE}" |
+      nl |
+      dedup-history
+  )"
+  echo "${hist}" >"${HISTFILE}"
+  history -c
+  history -r
+}
+
+function git-ps1 {
+  if [[ $? -eq 0 ]]; then
+    local prefix=$'\[\\e[0;34m\]\[\\e[0;97;44m\] \W \[\\e[0;34;42m\]\[\\e[0;97;42m\] ✓ \[\\e[0;32m\]\[\\e[0m\]'
+  else
+    local prefix=$'\[\\e[0;34m\]\[\\e[0;97;44m\] \W \[\\e[0;34;41m\]\[\\e[0;97;41m\] ✕ \[\\e[0;31m\]\[\\e[0m\]'
+  fi
+  local suffix=$' $ '
+  __git_ps1 "${prefix}" "${suffix}"
+}
+
+function tmux-resize-panes {
+  # shellcheck disable=SC2312
+  tmux list-panes -a -F '#D' -f '#{!:#{window_zoomed_flag}}' |
+    xargs -L 1 tmux select-layout -E -t
+}

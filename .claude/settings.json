@@ -12,5 +12,11 @@
     "padding": 0,
     "refreshInterval": 10
   },
+  "outputStyle": "neutral",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "theme": "auto"
 }

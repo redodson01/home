@@ -1,7 +1,12 @@
 [commit]
 	gpgSign = true
+[core]
+	excludesFile = ~/.gitignore
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -9,6 +14,8 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[rebase]
+	autoSquash = true
 [tag]
 	gpgSign = true
 [user]
