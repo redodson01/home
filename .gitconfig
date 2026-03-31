@@ -1,9 +1,44 @@
+[alias]
+	a    = add
+	au   = add --update
+	b    = better-branch
+	ba   = better-branch --all
+	ch   = checkout
+	d    = diff
+	dc   = diff --cached
+	dcn  = diff --cached --name-only
+	dcs  = diff --cached --name-status
+	dn   = diff --name-only
+	ds   = diff --name-status
+	l    = log --topo-order --oneline
+	lf   = log --topo-order --oneline --first-parent
+	lg   = log --topo-order --oneline --graph
+	ln   = log --topo-order --oneline --name-only
+	ls   = log --topo-order --oneline --name-status
+	s    = status
+	sh   = show --oneline
+	shf  = show --oneline --first-parent
+	shn  = show --oneline --name-only
+	shs  = show --oneline --name-status
 [commit]
 	gpgSign = true
 [core]
+	excludesFile = ~/.gitignore
 	pager = delta
+[delta "solarized"]
+	file-decoration-style = dim
+	file-modified-label = modified:
+	file-style = dim ul
+	hunk-header-decoration-style = dim
+	hunk-header-style = dim italic
+	hunk-label = @@
+	syntax-theme = Solarized (dark)
 [delta]
+	features = solarized
 	navigate = true
+[fetch]
+	prune = true
+	pruneTags = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
