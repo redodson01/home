@@ -36,4 +36,12 @@ if [[ -f "${HOME}/.cargo/env" ]]; then
   source "$HOME/.cargo/env"
 fi
 
+if command -v go > /dev/null; then
+  export GOPATH="${HOME}/.go"
+
+  if [[ -d "${GOPATH}/bin" ]]; then
+    export PATH="${GOPATH}/bin:${PATH}"
+  fi
+fi
+
 alias home='git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}"'

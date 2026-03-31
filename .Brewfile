@@ -1,6 +1,7 @@
 brew "bash"
 brew "git"
 brew "gnupg"
+brew "go"
 brew "pass"
 brew "pinentry-mac"
 brew "pyenv"
