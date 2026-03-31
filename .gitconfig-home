@@ -1,0 +1,5 @@
+[alias]
+	bootstrap = !home-bootstrap
+	check = !home-check
+	fmt = !home-fmt
+	watch = !hwatch --color --no-title --exec --use-pty --limit 10 git --no-optional-locks

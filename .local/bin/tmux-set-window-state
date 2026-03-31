@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+if [[ -z "${TMUX:-}" ]]; then
+  exit
+fi
+
+case "${1:-idle}" in
+idle)
+  tmux set-option -u -w -t "${TMUX_PANE}" @window_state
+  ;;
+busy)
+  tmux set-option -w -t "${TMUX_PANE}" @window_state '…'
+  ;;
+attn)
+  tmux set-option -w -t "${TMUX_PANE}" @window_state '!'
+  ;;
+*)
+  ;;
+esac
+
+tmux refresh-client -S
