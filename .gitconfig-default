@@ -1,0 +1,2 @@
+[alias]
+	watch = !watch git --no-optional-locks
