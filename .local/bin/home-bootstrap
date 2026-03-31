@@ -79,6 +79,8 @@ fi
 
 cmd-guard --setup
 
+npm install -g ccstatusline@2.2.27
+
 if command -v gh >/dev/null && ! gh auth status >/dev/null; then
   gh auth login
 fi
