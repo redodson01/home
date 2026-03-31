@@ -57,3 +57,12 @@ if [[ -f "${HOME}/.cargo/env" ]]; then
 else
   echo ".bashrc: ${HOME}/.cargo/env: No such file or directory" >&2
 fi
+
+if command -v go >/dev/null; then
+  export GOPATH="${HOME}/.go"
+  if [[ -d "${GOPATH}/bin" ]]; then
+    export PATH="${PATH}:${GOPATH}/bin"
+  fi
+else
+  echo '.bashrc: go: command not found' >&2
+fi
