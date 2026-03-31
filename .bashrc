@@ -45,3 +45,11 @@ if [[ -f "${HOME}/.cargo/env" ]]; then
   # shellcheck source=/dev/null
   source "${HOME}/.cargo/env"
 fi
+
+if command -v go >/dev/null; then
+  export GOPATH="${HOME}/.go"
+
+  if [[ -d "${GOPATH}/bin" ]]; then
+    export PATH="${GOPATH}/bin:${PATH}"
+  fi
+fi
