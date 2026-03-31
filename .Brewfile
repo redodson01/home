@@ -1,5 +1,6 @@
 brew "bash"
 brew "gnupg"
+brew "go"
 brew "pass"
 brew "pyenv"
 brew "rbenv"
