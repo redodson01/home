@@ -1,0 +1,98 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "a663d17d-2048-40b3-8d4e-c6c1611718eb",
+        "type": "model"
+      },
+      {
+        "id": "3d7568d1-3db0-4696-b1eb-7ba351a96d8b",
+        "type": "separator"
+      },
+      {
+        "id": "94b0edc3-43f4-48ed-bdc1-aa6cf5a5a0d3",
+        "type": "output-style"
+      },
+      {
+        "id": "aaf4f9a9-76eb-4e99-bc60-524314ff3376",
+        "type": "separator"
+      },
+      {
+        "id": "c988ad55-eea7-4c03-a036-406c0777fbcc",
+        "type": "thinking-effort"
+      }
+    ],
+    [
+      {
+        "id": "6e4066d2-aa76-4327-91ab-4c724b4478d0",
+        "type": "current-working-dir"
+      }
+    ],
+    [
+      {
+        "id": "2280a57e-90df-40db-b99d-5e8e06f192c7",
+        "type": "context-bar"
+      }
+    ],
+    [
+      {
+        "id": "ad4788e5-65e1-4fde-91be-201a7f9fad2c",
+        "type": "session-name"
+      }
+    ],
+    [
+      {
+        "id": "30ef1438-915e-4516-89e8-d45256eb7393",
+        "type": "reset-timer"
+      },
+      {
+        "id": "81da0bf5-821b-4202-8d47-d6b4c59a41e9",
+        "type": "separator"
+      },
+      {
+        "id": "5924445a-7873-4da0-a55a-e625c39478bb",
+        "type": "session-usage"
+      },
+      {
+        "id": "072358eb-c0c2-4f38-b3f6-a5252e24c3cd",
+        "type": "separator"
+      },
+      {
+        "id": "f8ee6071-0988-4350-972b-699c9743051d",
+        "type": "weekly-reset-timer"
+      },
+      {
+        "id": "49587420-6dd4-4706-8b4d-1f96a4f504f9",
+        "type": "separator"
+      },
+      {
+        "id": "ad7f0fa0-dece-449c-9fc3-fa3239555660",
+        "type": "weekly-usage"
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "defaultPaddingSide": "both",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  }
+}
