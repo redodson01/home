@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+print -s
+
+if [[ -t 1 ]]; then
+  session_attached_color=$'#{?session_attached,\e[0;91m}'
+  window_color=$'#{?#{==:#{@window_state},!},\e[0;31m,#{==:#{@window_state},…},\e[0;33m,window_active_clients,\e[0;91m}'
+  window_active_color=$'#{?window_active_clients,\e[0;91m}'
+  reset_color=$'\e[0m'
+fi
+
+if tmux list-sessions -F "- ${session_attached_color:-}#S: #{session_windows} windows#{?session_attached, (attached)}${reset_color:-}#{W:"$'\n'"#{?loop_last_flag,└─> ,├─> }+ ${window_color:-}#I: #W#{?@window_state,#{@window_state},#F,#F}${window_active_color}#{?window_active_clients, (active)}${reset_color:-}}" -O creation 2>/dev/null; then
+  print -s
+fi
