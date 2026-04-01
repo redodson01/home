@@ -112,3 +112,11 @@ if command -v npm >/dev/null; then
 else
   echo 'home-bootstrap: npm: command not found' >&2
 fi
+
+if command -v gh >/dev/null; then
+  if ! gh auth status >/dev/null; then
+    gh auth login
+  fi
+else
+  echo 'home-bootstrap: gh: command not found' >&2
+fi
