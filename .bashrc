@@ -87,3 +87,15 @@ if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh" ]]; then
 else
   echo ".bashrc: ${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh: No such file or directory" >&2
 fi
+
+if command -v gh >/dev/null; then
+  if GITHUB_PACKAGES_TOKEN="$(gh auth token)"; then
+    export GITHUB_PACKAGES_TOKEN
+  fi
+else
+  echo '.bashrc: gh: command not found' >&2
+fi
+
+if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
+  export CIRCLECI_TOKEN
+fi
