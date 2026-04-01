@@ -1,5 +1,9 @@
 [commit]
 	gpgSign = true
+[core]
+	pager = delta
+[delta]
+	navigate = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
@@ -7,6 +11,10 @@
 	smudge = git-lfs smudge -- %f
 [init]
 	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictStyle = zdiff3
 [tag]
 	gpgSign = true
 [user]
