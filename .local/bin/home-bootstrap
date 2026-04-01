@@ -116,3 +116,9 @@ fi
 if command -v npm >/dev/null; then
   npm install --global ccstatusline@latest
 fi
+
+if command -v gh >/dev/null; then
+  if ! gh auth status >/dev/null; then
+    gh auth login
+  fi
+fi
