@@ -6,6 +6,8 @@ if [[ $- != *i* ]]; then
   return
 fi
 
+export CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"
+export GITHUB_PACKAGES_TOKEN="$(gh auth token)"
 export GPG_TTY="$(tty)"
 export HOMEBREW_PREFIX=/opt/homebrew
 export NVM_DIR="${HOME}/.nvm"

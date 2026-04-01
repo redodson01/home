@@ -2,6 +2,8 @@
 	gpgSign = true
 [core]
 	pager = delta
+[credential "https://git.heroku.com"]
+	helper = !heroku git:credentials
 [delta]
 	navigate = true
 [filter "lfs"]
