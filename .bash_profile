@@ -63,3 +63,13 @@ if [[ -r "${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh" ]]; then
   # shellcheck source=/dev/null
   source "${HOMEBREW_PREFIX:?}/etc/profile.d/z.sh"
 fi
+
+if command -v gh >/dev/null; then
+  if GITHUB_PACKAGES_TOKEN="$(gh auth token)"; then
+    export GITHUB_PACKAGES_TOKEN
+  fi
+fi
+
+if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
+  export CIRCLECI_TOKEN
+fi
