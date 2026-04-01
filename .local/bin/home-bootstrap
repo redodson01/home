@@ -78,3 +78,11 @@ else
 fi
 
 cmd-guard --setup
+
+if command -v gh >/dev/null && ! gh auth status >/dev/null; then
+  gh auth login
+fi
+
+if ! heroku whoami &>/dev/null; then
+  heroku login
+fi
