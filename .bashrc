@@ -7,6 +7,7 @@ if [[ $- != *i* ]]; then
 fi
 
 export CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"
+export FZF_DEFAULT_OPTS_FILE="${HOME}/.fzfrc"
 export GITHUB_PACKAGES_TOKEN="$(gh auth token)"
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
