@@ -25,7 +25,16 @@
 [core]
 	excludesFile = ~/.gitignore
 	pager = delta
+[delta "solarized"]
+	file-decoration-style = dim
+	file-modified-label = modified:
+	file-style = dim ul
+	hunk-header-decoration-style = dim
+	hunk-header-style = dim italic
+	hunk-label = @@
+	syntax-theme = Solarized (dark)
 [delta]
+	features = solarized
 	navigate = true
 [fetch]
 	prune = true
