@@ -28,7 +28,16 @@
 	pager = delta
 [credential "https://git.heroku.com"]
 	helper = !heroku git:credentials
+[delta "solarized"]
+	file-decoration-style = dim ol ul
+	file-modified-label = modified:
+	file-style = dim
+	hunk-header-decoration-style = dim
+	hunk-header-style = dim italic
+	hunk-label = @@
+	syntax-theme = Solarized (dark)
 [delta]
+	features = solarized
 	navigate = true
 [fetch]
 	prune = true
