@@ -6,6 +6,7 @@ fi
 
 GPG_TTY="$(tty)"
 
+export FZF_DEFAULT_OPTS_FILE="${HOME}/.fzfrc"
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
