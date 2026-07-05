@@ -6,6 +6,8 @@
 	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>A995672D-AEAB-45BA-8F11-CFD3B74EBF28</string>
+	<key>DimBackgroundWindows</key>
+	<true/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideTab</key>
