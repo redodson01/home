@@ -12,6 +12,8 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'lifepillar/vim-solarized8'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
   call plug#end()
 endif
 
