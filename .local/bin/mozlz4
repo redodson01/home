@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+"""Decode and encode Mozilla mozLz4 files.
+
+Container: the magic b"mozLz40\0", a little-endian uint32 giving the
+decompressed size, then a raw LZ4 block.
+"""
+
+import argparse
+import os
+import sys
+
+MAGIC = b"mozLz40\0"
+
+# LZ4 block format requires the final 5 bytes to be literals and forbids a
+# match from starting in the final 12 bytes.
+LAST_LITERALS = 5
+MATCH_LIMIT = 12
+
+
+def decompress(src, size):
+    dst = bytearray()
+    i, n = 0, len(src)
+    while i < n:
+        token = src[i]
+        i += 1
+        length = token >> 4
+        if length == 15:
+            while src[i] == 255:
+                length += 255
+                i += 1
+            length += src[i]
+            i += 1
+        dst += src[i : i + length]
+        i += length
+        if i >= n:
+            break
+        offset = src[i] | src[i + 1] << 8
+        i += 2
+        length = (token & 15) + 4
+        if token & 15 == 15:
+            while src[i] == 255:
+                length += 255
+                i += 1
+            length += src[i]
+            i += 1
+        start = len(dst) - offset
+        if offset >= length:
+            dst += dst[start : start + length]
+        else:
+            for j in range(start, start + length):
+                dst.append(dst[j])
+    if len(dst) != size:
+        sys.exit(f"mozlz4: expected {size} bytes, decompressed {len(dst)}")
+    return bytes(dst)
+
+
+def _emit_length(out, length):
+    while length >= 255:
+        out.append(255)
+        length -= 255
+    out.append(length)
+
+
+def _emit(out, src, anchor, end, offset=0, match=0):
+    literals = end - anchor
+    out.append(min(literals, 15) << 4 | min(match, 15))
+    if literals >= 15:
+        _emit_length(out, literals - 15)
+    out += src[anchor:end]
+    if offset:
+        out += offset.to_bytes(2, "little")
+        if match >= 15:
+            _emit_length(out, match - 15)
+
+
+def compress(src):
+    out = bytearray()
+    n = len(src)
+    table = [-1] * 65536
+    anchor = i = 0
+    while i <= n - MATCH_LIMIT:
+        chunk = src[i : i + 4]
+        key = int.from_bytes(chunk, "little") * 2654435761 >> 16 & 0xFFFF
+        candidate, table[key] = table[key], i
+        if candidate < 0 or i - candidate > 65535 or src[candidate : candidate + 4] != chunk:
+            i += 1
+            continue
+        length = 4
+        while i + length < n - LAST_LITERALS and src[candidate + length] == src[i + length]:
+            length += 1
+        _emit(out, src, anchor, i, i - candidate, length - 4)
+        i += length
+        anchor = i
+    _emit(out, src, anchor, n)
+    return bytes(out)
+
+
+def decode(blob):
+    if not blob.startswith(MAGIC):
+        sys.exit("mozlz4: not a mozLz4 file")
+    return decompress(blob[12:], int.from_bytes(blob[8:12], "little"))
+
+
+def encode(blob):
+    return MAGIC + len(blob).to_bytes(4, "little") + compress(blob)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("-d", "--decode", action="store_true", help="decode a mozLz4 file")
+    mode.add_argument("-e", "--encode", action="store_true", help="encode a mozLz4 file")
+    parser.add_argument("-f", "--force", action="store_true", help="overwrite the destination")
+    parser.add_argument("file", nargs="?", help="input file; omit to use stdin and stdout")
+    args = parser.parse_args()
+    convert = decode if args.decode else encode
+
+    if args.file is None:
+        sys.stdout.buffer.write(convert(sys.stdin.buffer.read()))
+        return
+
+    if args.decode:
+        if not args.file.endswith(".mozlz4"):
+            sys.exit(f"mozlz4: {args.file}: expected a .mozlz4 suffix")
+        destination = args.file[: -len(".mozlz4")]
+    else:
+        destination = args.file + ".mozlz4"
+    if not args.force and os.path.exists(destination):
+        sys.exit(f"mozlz4: {destination}: already exists")
+
+    with open(args.file, "rb") as handle:
+        output = convert(handle.read())
+    with open(destination, "wb") as handle:
+        handle.write(output)
+
+
+if __name__ == "__main__":
+    main()

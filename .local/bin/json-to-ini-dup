@@ -1,0 +1,6 @@
+#!/usr/bin/env jq --raw-output --from-file
+
+def join_entries(f; str):
+  to_entries | map(f) | join(str);
+
+join_entries(if .value == {} then "[\(.key)]" else "[\(.key)]\n\(.value | join_entries("\(.key)=\(.value[])"; "\n"))" end; "\n\n")
