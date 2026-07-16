@@ -2,6 +2,8 @@
 	gpgSign = true
 [core]
 	pager = delta
+[credential "https://git.heroku.com"]
+	helper = !heroku git:credentials
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
