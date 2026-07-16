@@ -12,6 +12,5 @@ cd
 
 git --git-dir="${HOME}/.local/share/home" --work-tree="${HOME}" ls-files -z |
   xargs --null file --mime-type --no-pad |
-  grep 'text/x-shellscript$' |
-  cut -f 1 -d ':' |
+  rg --pcre2 --only-matching '^.*(?=: text/x-shellscript$)' |
   xargs --verbose shellcheck "${@}"
