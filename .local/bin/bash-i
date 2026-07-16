@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# A login shell ignores --rcfile, so start an interactive shell with this file
+# as its rcfile, and run the login startup files from here.
+if [[ $- != *i* ]]; then
+  exec "${BASH}" --rcfile "${BASH_SOURCE[0]}" -i -s -- "${@}"
+fi
+
+bash_i_command=("${@}")
+set --
+
+# shellcheck source=/dev/null
+source /etc/profile
+# shellcheck source=/dev/null
+source "${HOME}/.bash_profile"
+
+# Job control is off while the startup files run. The command needs its own
+# process group so Ctrl-Z can stop it.
+set -m
+"${bash_i_command[@]}"
+unset bash_i_command

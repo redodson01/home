@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+hwatch --mouse --color --no-title --wrap --exec --use-pty --interval 1 --limit 10 "${@}"
