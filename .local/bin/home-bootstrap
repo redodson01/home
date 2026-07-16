@@ -120,3 +120,11 @@ if command -v gh >/dev/null; then
 else
   echo 'home-bootstrap: gh: command not found' >&2
 fi
+
+if command -v heroku >/dev/null; then
+  if ! heroku whoami &>/dev/null; then
+    heroku login
+  fi
+else
+  echo 'home-bootstrap: heroku: command not found' >&2
+fi
