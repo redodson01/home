@@ -6,6 +6,7 @@ brew "git-lfs"
 brew "gnupg"
 brew "go"
 brew "pass"
+brew "pinentry-mac"
 brew "pyenv"
 brew "rbenv"
 brew "redodson01/tap/vim2bat", trusted: true
