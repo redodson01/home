@@ -95,3 +95,7 @@ if command -v gh >/dev/null; then
 else
   echo '.bashrc: gh: command not found' >&2
 fi
+
+if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
+  export CIRCLECI_TOKEN
+fi
