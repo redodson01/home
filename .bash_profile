@@ -69,3 +69,7 @@ if command -v gh >/dev/null; then
     export GITHUB_PACKAGES_TOKEN
   fi
 fi
+
+if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-token -w)"; then
+  export CIRCLECI_TOKEN
+fi
