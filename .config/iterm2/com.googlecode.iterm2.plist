@@ -16,6 +16,18 @@
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_25082682-DB9D-4797-AB41-468BB53D8D66</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_25082682-DB9D-4797-AB41-468BB53D8D66_selection</key>
+	<integer>0</integer>
+	<key>NeverWarnAboutShortLivedSessions_6A4CF6C5-D4C3-4599-981E-61F1B334E338</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_6A4CF6C5-D4C3-4599-981E-61F1B334E338_selection</key>
+	<integer>0</integer>
+	<key>NeverWarnAboutShortLivedSessions_ED5FC370-D4EB-4E02-AE5F-4E45D460B1C0</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_ED5FC370-D4EB-4E02-AE5F-4E45D460B1C0_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
