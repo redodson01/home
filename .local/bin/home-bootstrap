@@ -122,3 +122,9 @@ if command -v gh >/dev/null; then
     gh auth login
   fi
 fi
+
+if command -v claude >/dev/null; then
+  if ! claude auth status >/dev/null; then
+    claude auth login
+  fi
+fi
