@@ -8,6 +8,8 @@
 	<string>25082682-DB9D-4797-AB41-468BB53D8D66</string>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>HideTab</key>
+	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>New Bookmarks</key>
