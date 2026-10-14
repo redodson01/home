@@ -128,3 +128,11 @@ if command -v heroku >/dev/null; then
 else
   echo 'home-bootstrap: heroku: command not found' >&2
 fi
+
+if command -v claude >/dev/null; then
+  if ! claude auth status >/dev/null; then
+    claude auth login
+  fi
+else
+  echo 'home-bootstrap: claude: command not found' >&2
+fi
