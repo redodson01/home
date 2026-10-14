@@ -6,6 +6,8 @@
 	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>25082682-DB9D-4797-AB41-468BB53D8D66</string>
+	<key>DimInactiveSplitPanes</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideTab</key>
