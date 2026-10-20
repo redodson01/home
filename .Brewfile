@@ -28,12 +28,12 @@ brew "redis"
 brew "redodson01/tap/cmd-guard", trusted: true
 brew "redodson01/tap/git-better-branch", trusted: true
 brew "redodson01/tap/how-to-say", trusted: true
+brew "redodson01/versions/tmux@3.7", trusted: true
 brew "ripgrep"
 brew "sd"
 brew "shellcheck"
 brew "shfmt"
 brew "sponge"
-brew "tmux"
 brew "vim"
 brew "z"
 cask "crossover"
