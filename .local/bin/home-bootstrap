@@ -47,6 +47,18 @@ else
   eval "${brew_shellenv}"
 fi
 
+# TEMP: Pin tmux 3.7 until tmux/tmux#5776 and tmux/tmux#5784 are released.
+if tmux_versions="$(brew list --versions tmux)"; then
+  tmux_version="${tmux_versions##* }"
+  newest_version="$(printf '%s\n' 3.7 "${tmux_version}" | sort -V | tail -n 1)"
+
+  if [[ "${newest_version}" != 3.7 ]]; then
+    brew uninstall tmux
+    brew tap --force homebrew/core
+    brew version-install tmux 3.7c
+  fi
+fi
+
 brew bundle --global install
 
 if [[ -n "${CLEANUP:-}" ]]; then
