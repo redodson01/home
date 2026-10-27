@@ -1,3 +1,37 @@
+[alias]
+	a       = add
+	au      = add --update
+	b       = better-branch
+	ba      = better-branch --all
+	c       = commit
+	ca      = commit --all
+	ch      = checkout
+	d       = diff
+	dc      = diff --cached
+	dcn     = diff --cached --name-only
+	dcnu    = diff --cached --name-only @{upstream}
+	dcs     = diff --cached --name-status
+	dcsu    = diff --cached --name-status @{upstream}
+	dcu     = diff --cached @{upstream}
+	dn      = diff --name-only
+	dnu     = diff --name-only @{upstream}
+	ds      = diff --name-status
+	dsu     = diff --name-status @{upstream}
+	du      = diff @{upstream}
+	l       = log --topo-order --oneline
+	la      = log --topo-order --oneline --all
+	lf      = log --topo-order --oneline --first-parent
+	lg      = log --topo-order --oneline --graph
+	ln      = log --topo-order --oneline --name-only
+	lr      = log --topo-order --oneline --reverse
+	ls      = log --topo-order --oneline --name-status
+	r       = remote
+	s       = status
+	sh      = show --oneline
+	shf     = show --oneline --first-parent
+	shn     = show --oneline --name-only
+	shs     = show --oneline --name-status
+	watch   = !watch git --no-optional-locks
 [commit]
 	gpgSign = true
 [core]
