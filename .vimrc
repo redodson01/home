@@ -31,3 +31,5 @@ if !empty(glob('~/.vim/plugged/vim-solarized8/colors/solarized8.vim'))
   let g:solarized_use16=1
   colorscheme solarized8
 endif
+
+nnoremap <Leader>q :nohlsearch<Enter>
