@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+# Usage errors exit 1, not 2: in a Claude Code hook, exit 2 blocks the
+# prompt (UserPromptSubmit) or keeps Claude from stopping (Stop).
+function print-usage {
+  local program
+  program="$(basename "${0}")"
+  cat <<EOF
+usage: ${program} (attn | busy | done | idle)
+EOF
+}
+
+if [[ $# -ne 1 ]]; then
+  print-usage >&2
+  exit 1
+fi
+
+if [[ -z "${TMUX_PANE:-}" ]]; then
+  exit
+fi
+
+# PermissionRequest input has no tool_use_id, so a tool call is identified by
+# its agent, tool, and input. busy clears ! only for the call that raised it.
+key=
+if [[ ! -t 0 ]]; then
+  tool_call="$(jq -cS 'select(.tool_name) | [.agent_id, .tool_name, .tool_input]')"
+  if [[ -n "${tool_call}" ]]; then
+    key="$(shasum <<<"${tool_call}" | cut -c1-40)"
+  fi
+fi
+
+case "${1}" in
+attn)
+  if [[ -n "${key}" ]]; then
+    tmux set-option -w -t "${TMUX_PANE}" @window-state-key "${key}"
+  fi
+  tmux set-option -w -t "${TMUX_PANE}" @window-state '!'
+  ;;
+busy)
+  if [[ -n "${key}" ]]; then
+    tmux if-shell -F -t "${TMUX_PANE}" "#{||:#{!=:#{@window-state},!},#{==:#{@window-state-key},${key}}}" "set-option -w -t ${TMUX_PANE} @window-state …"
+  else
+    tmux set-option -w -t "${TMUX_PANE}" @window-state '…'
+  fi
+  ;;
+done)
+  tmux set-option -w -t "${TMUX_PANE}" @window-state '✓'
+  ;;
+idle)
+  tmux set-option -u -w -t "${TMUX_PANE}" @window-state
+  ;;
+*)
+  print-usage >&2
+  exit 1
+  ;;
+esac
