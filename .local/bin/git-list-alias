@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ -n "${DEBUG:-}" ]]; then
+  set -o xtrace
+fi
+
+prefix='git'
+
+if [[ $# -ge 1 ]]; then
+  prefix="${1}"
+fi
+
+git config list |
+  sed -En "s/^alias\\.([-0-9A-Z_a-z]+)=([^\!].*)$/alias ${prefix:0:1}\\1='${prefix} \\2'/p"
