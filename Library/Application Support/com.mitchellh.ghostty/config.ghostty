@@ -1,1 +1,4 @@
+keybind = shift+enter=text:\x0a
+keybind = super+\=text:\x02
+keybind = super+`=text:\x02
 theme = dark:Apple Solarized Dark,light:Apple Solarized Light
