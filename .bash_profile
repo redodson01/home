@@ -86,6 +86,12 @@ fi
 alias la='ls -A'
 alias ls='ls -FGhl'
 
+git_list_alias_git="$(git list-alias git)"
+git_list_alias_home="$(git list-alias home)"
+
+eval "${git_list_alias_git}"
+eval "${git_list_alias_home}"
+
 function dedup-history {
   # shellcheck disable=SC2312
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
