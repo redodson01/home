@@ -79,6 +79,10 @@ if CIRCLECI_TOKEN="$(security find-generic-password -a "${USER}" -s circleci-tok
   export CIRCLECI_TOKEN
 fi
 
+if [[ -n "${TMUX}" ]]; then
+  trap tmux-resize-panes WINCH
+fi
+
 function dedup-history {
   # shellcheck disable=SC2312
   sort -k2 -k1nr | uniq -f1 | sort -n | cut -c8-
@@ -106,4 +110,10 @@ function git-ps1 {
   fi
   local suffix=$' $ '
   __git_ps1 "${prefix}" "${suffix}"
+}
+
+function tmux-resize-panes {
+  # shellcheck disable=SC2312
+  tmux list-panes -a -F '#D' -f '#{!:#{window_zoomed_flag}}' |
+    xargs -L 1 tmux select-layout -E -t
 }
