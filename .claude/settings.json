@@ -7,6 +7,36 @@
     ]
   },
   "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state !"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state …"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state …"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -14,6 +44,46 @@
           {
             "type": "command",
             "command": "cmd-guard"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -u -w -t \"${TMUX_PANE}\" @window_state"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state ✓"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state !"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ -z \"${TMUX_PANE}\" ]] || tmux set-option -w -t \"${TMUX_PANE}\" @window_state …"
           }
         ]
       }
