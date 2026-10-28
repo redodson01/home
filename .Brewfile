@@ -1,5 +1,6 @@
 brew "bash"
 brew "bash-completion@2"
+brew "btop"
 brew "fzf"
 brew "git-lfs"
 brew "gnupg"
