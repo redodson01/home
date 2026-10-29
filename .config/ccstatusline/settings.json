@@ -3,44 +3,80 @@
   "lines": [
     [
       {
-        "id": "1",
-        "type": "model",
-        "color": "cyan"
+        "id": "9ed173b6-161e-419d-bdaf-7989d7bd5836",
+        "type": "model"
       },
       {
-        "id": "2",
-        "type": "separator"
+        "id": "1ab5f47d-6b39-49f9-a5b1-6acf773edaed",
+        "type": "thinking-effort"
       },
       {
-        "id": "3",
-        "type": "context-length",
-        "color": "brightBlack"
-      },
-      {
-        "id": "4",
-        "type": "separator"
-      },
-      {
-        "id": "5",
-        "type": "git-branch",
-        "color": "magenta"
-      },
-      {
-        "id": "6",
-        "type": "separator"
-      },
-      {
-        "id": "7",
-        "type": "git-changes",
-        "color": "yellow"
+        "id": "cf94fa57-1112-4f86-81fb-6b0f8815f128",
+        "type": "output-style"
       }
     ],
-    [],
-    []
+    [
+      {
+        "id": "4121c15d-4b66-4711-9618-c8e0a82aab25",
+        "type": "git-ci-status"
+      },
+      {
+        "id": "600cba05-93d8-4c1f-ad98-4401483f0bec",
+        "type": "git-branch"
+      },
+      {
+        "id": "9b980dab-f17e-4e7f-bc21-b16cc971327a",
+        "type": "git-ahead-behind"
+      },
+      {
+        "id": "2c61488c-1c41-41ac-9435-6ce7aac87f3e",
+        "type": "git-staged"
+      },
+      {
+        "id": "fcd71428-f600-4d78-abeb-bab5c221a028",
+        "type": "git-unstaged"
+      },
+      {
+        "id": "d18952f8-cdc7-4db1-8050-7b2fa52e2f70",
+        "type": "git-untracked"
+      }
+    ],
+    [
+      {
+        "id": "7f48c28d-7230-4629-8235-e2da302ff94d",
+        "type": "current-working-dir",
+        "metadata": {
+          "abbreviateHome": "true"
+        }
+      }
+    ],
+    [
+      {
+        "id": "f2d91519-514f-49c9-8e87-ae56dec419bd",
+        "type": "context-bar"
+      }
+    ],
+    [
+      {
+        "id": "528f041d-0975-4e8a-9ba7-c361c9157c28",
+        "type": "session-name"
+      }
+    ],
+    [
+      {
+        "id": "559219a6-7fd2-419d-a7e8-04bb926ea891",
+        "type": "session-usage",
+        "metadata": {
+          "display": "progress-short",
+          "cursor": "true"
+        }
+      }
+    ]
   ],
   "flexMode": "full",
   "compactThreshold": 60,
-  "colorLevel": 2,
+  "colorLevel": 1,
+  "defaultSeparator": "|",
   "defaultPaddingSide": "both",
   "inheritSeparatorColors": false,
   "globalBold": false,
