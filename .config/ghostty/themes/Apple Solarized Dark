@@ -1,0 +1,56 @@
+# iTerm2 Solarized Dark
+palette = 0=#073642
+palette = 1=#dc322f
+palette = 2=#859900
+palette = 3=#b58900
+palette = 4=#268bd2
+palette = 5=#d33682
+palette = 6=#2aa198
+palette = 7=#eee8d5
+palette = 8=#335e69
+palette = 9=#cb4b16
+palette = 10=#586e75
+palette = 11=#657b83
+palette = 12=#839496
+palette = 13=#6c71c4
+palette = 14=#93a1a1
+palette = 15=#fdf6e3
+background = #002b36
+foreground = #839496
+cursor-color = #839496
+cursor-text = #073642
+selection-background = #073642
+selection-foreground = #93a1a1
+
+# Apple System Colors
+# palette = 0=#1a1a1a
+# palette = 1=#cc372e
+# palette = 2=#26a439
+# palette = 3=#cdac08
+# palette = 4=#0869cb
+# palette = 5=#9647bf
+# palette = 6=#479ec2
+# palette = 7=#98989d
+palette = 8=#464646
+# palette = 9=#ff453a
+# palette = 10=#32d74b
+# palette = 11=#ffd60a
+# palette = 12=#0a84ff
+# palette = 13=#bf5af2
+# palette = 14=#76d6ff
+# palette = 15=#ffffff
+background = #1e1e1e
+# foreground = #ffffff
+cursor-color = #98989d
+# cursor-text = #ffffff
+selection-background = #3f638b
+# selection-foreground = #ffffff
+
+# Apple Solarized Dark
+palette = 0=#2b2b2b
+palette = 2=#43a148
+# palette = 10=#6eca6e
+# palette = 11=#e2b038
+# palette = 12=#5fb3fd
+# palette = 14=#5ccac0
+# palette = 15=#b8b8bd
