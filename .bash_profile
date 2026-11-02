@@ -2,6 +2,7 @@
 
 GPG_TTY="$(tty)"
 
+export FZF_DEFAULT_OPTS='--color=base16'
 export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
