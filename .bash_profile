@@ -2,6 +2,7 @@
 
 GPG_TTY="$(tty)"
 
+export FZF_DEFAULT_OPTS='--color=base16'
 export GPG_TTY
 export NVM_DIR="${HOME}/.nvm"
 export PATH="${HOME}/.local/bin:${PATH}"
