@@ -105,3 +105,6 @@ else
   # shellcheck source=/dev/null
   source "${HOME}/.cargo/env"
 fi
+
+vim2bat --clean --truecolor --all
+vim2bat solarized8
