@@ -8,6 +8,7 @@ brew "go"
 brew "pass"
 brew "pyenv"
 brew "rbenv"
+brew "redodson01/tap/vim2bat", trusted: true
 brew "shellcheck"
 brew "shfmt"
 brew "z"
