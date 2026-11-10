@@ -26,5 +26,7 @@ if !empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 if !empty(glob('~/.vim/plugged/vim-solarized8/colors/solarized8.vim'))
+  let g:solarized_termtrans=1
+  let g:solarized_use16=1
   colorscheme solarized8
 endif
