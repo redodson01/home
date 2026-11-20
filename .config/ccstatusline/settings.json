@@ -13,6 +13,17 @@
       {
         "id": "276f65f3-0bbf-414f-aa85-8e6a3fc51eae",
         "type": "output-style"
+      },
+      {
+        "id": "3be33c03-740e-4111-a461-1295db0f81b5",
+        "type": "flex-separator"
+      },
+      {
+        "id": "6ad02fe9-8577-4333-9c7b-f932fd4c1f48",
+        "type": "context-percentage",
+        "metadata": {
+          "display": "slider-only"
+        }
       }
     ],
     [
@@ -57,6 +68,18 @@
         "metadata": {
           "hide": "no-git"
         }
+      },
+      {
+        "id": "1f73ade7-b132-4e6e-a367-f9c1f1dbe069",
+        "type": "flex-separator"
+      },
+      {
+        "id": "db37b18d-95df-4ece-b623-3ad68203cb6d",
+        "type": "session-usage",
+        "metadata": {
+          "display": "slider-only",
+          "cursor": "true"
+        }
       }
     ],
     [
@@ -66,49 +89,21 @@
         "metadata": {
           "abbreviateHome": "true"
         }
-      }
-    ],
-    [
-      {
-        "id": "63b12ccd-37f4-48c3-b2eb-fab0912c9ba9",
-        "type": "context-bar"
-      }
-    ],
-    [
-      {
-        "id": "5914657c-9492-45e9-832b-7e8b7fc75561",
-        "type": "session-name"
-      }
-    ],
-    [
-      {
-        "id": "d298844f-947d-437d-a3c8-a1bba3706b51",
-        "type": "reset-timer"
       },
       {
-        "id": "b3f31bcd-236e-4dea-98e9-41f33737645f",
-        "type": "session-usage",
-        "metadata": {
-          "cursor": "true",
-          "display": "progress-short"
-        }
+        "id": "8e038960-3996-4c11-9b1b-43ee3bb49860",
+        "type": "flex-separator"
       },
       {
-        "id": "b6c23204-c91f-4d44-9551-27330794528e",
-        "type": "weekly-reset-timer"
-      },
-      {
-        "id": "d50f7aa7-b009-4229-8cca-2cecdc366195",
+        "id": "792132e8-42e1-4dcc-a89c-a0e5636c1295",
         "type": "weekly-usage",
         "metadata": {
-          "cursor": "true",
-          "display": "progress-short"
+          "display": "slider-only",
+          "cursor": "true"
         }
       }
     ]
   ],
-  "flexMode": "full",
-  "compactThreshold": 60,
   "colorLevel": 1,
   "defaultSeparator": "|",
   "defaultPaddingSide": "both",
